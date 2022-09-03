@@ -1,0 +1,24 @@
+.monthLabel{
+text-align: center;
+margin: 0 0 16px; 
+
+}
+
+.weekdayLabel{
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        justify-content: center;
+        margin-bottom: 10px;
+        font-size: 10px;
+}
+
+.dayLabel{
+    text-align: center;
+}
+
+.days{
+        display: grid;
+        gap: 5px;
+        grid-template-columns: repeat(7, 1fr);
+        justify-content: center;
+}

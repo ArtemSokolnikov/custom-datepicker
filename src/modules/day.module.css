@@ -1,0 +1,48 @@
+.dayLabelSelectedFirstOrLastColor {
+  padding: 4px;
+  height: 35px;
+  width: 35px;
+  border: 0;
+  border-radius: 50%;
+  color: black;
+  background-color: rgba(213, 208, 208, 0.816);
+}
+
+.dayLabelNormalColor {
+  padding: 4px;
+  height: 35px;
+  width: 35px;
+  border: 0;
+  color: #001217;
+  background-color: #FFFFFF;
+}
+
+.dayLabelSelectedColor {
+  padding: 4px;
+  height: 35px;
+  width: 35px;
+  border: 0;
+  color: black;
+  border-radius: 50%;
+  background-color: rgba(213, 208, 208, 0.816);
+}
+
+.dayLabelRangeHoverColor {
+  padding: 4px;
+  height: 35px;
+  width: 35px;
+  border: 0;
+  color: black;
+  border-radius: 50%;
+  background-color: rgba(213, 208, 208, 0.816);
+}
+
+.dayLabelDisabledColor {
+  padding: 4px;
+  height: 35px;
+  width: 35px;
+  border: 0;
+  color: #808285;
+  border-radius: 50%;
+  background-color: #FFFFFF;
+}
