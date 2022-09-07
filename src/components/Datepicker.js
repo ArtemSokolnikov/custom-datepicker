@@ -1,12 +1,13 @@
-import { useState } from "react";
-import { useDatepicker, START_DATE } from "@datepicker-react/hooks";
-import Month from "./Month";
-import NavButton from "./NavButton";
-import DatepickerContext from "./datepickerContext";
-import style from '../modules/datepicker.module.css';
+import { START_DATE, useDatepicker } from "@datepicker-react/hooks";
 import CloseIcon from '@mui/icons-material/Close';
+import { useState } from "react";
+import style from '../modules/datepicker.module.css';
+import DatepickerContext from "./datepickerContext";
+import Month from "./Month";
 
 function Datepicker() {
+  let nameOfCurrentMonth = new Date().getMonth();
+  const [currentMonth, setCurrentMonth] = useState(nameOfCurrentMonth);
   const [state, setState] = useState({
     startDate: null,
     endDate: null,
@@ -15,6 +16,7 @@ function Datepicker() {
   const {
     firstDayOfWeek,
     activeMonths,
+    numberOfMonths,
     isDateSelected,
     isDateHovered,
     isFirstOrLastSelectedDate,
@@ -25,7 +27,9 @@ function Datepicker() {
     onDateSelect,
     onDateFocus,
     goToPreviousMonths,
-    goToNextMonths
+    goToNextMonths,
+    onResetDates,
+    minBookingDate, disabledDate
   } = useDatepicker({
     startDate: state.startDate,
     endDate: state.endDate,
@@ -52,7 +56,13 @@ function Datepicker() {
         isFirstOrLastSelectedDate,
         onDateSelect,
         onDateFocus,
-        onDateHover
+        onDateHover,
+        onResetDates,
+        goToPreviousMonths,
+        goToNextMonths,
+        numberOfMonths,
+        minBookingDate,
+        currentMonth, setCurrentMonth, disabledDate, nameOfCurrentMonth
       }}
     >
       <div>
@@ -67,23 +77,26 @@ function Datepicker() {
         <strong>End date: </strong>
         {state.endDate && state.endDate.toLocaleString()}
       </div>
-
-      <NavButton onClick={goToPreviousMonths}>Previous</NavButton>
-      <NavButton onClick={goToNextMonths}>Next</NavButton>
-
       <div className={style.activeMonths}>
-        <div> <CloseIcon /></div>
+        <div> <CloseIcon onClick={onResetDates} sx={{ cursor: 'pointer' }} /></div>
+        <div className={style.title}>
+          <div>
+            <strong>תאריך יציאה </strong>
+          </div>
+          <div>
+            <strong>תאריך חזרה </strong>
+          </div>
+        </div>
         <div className={style.twoMonths}>
           <div className={style.lineOfMonth}></div>
           {activeMonths.map(month => (
-
             <Month
               key={`${month.year}-${month.month}`}
               year={month.year}
               month={month.month}
               firstDayOfWeek={firstDayOfWeek}
+              numberOfMonth={`${month.month}`}
             />
-
           ))}
         </div>
       </div>

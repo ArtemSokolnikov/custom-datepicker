@@ -1,11 +1,13 @@
 
 import { useDay } from "@datepicker-react/hooks";
+import { useEffect, useState } from "react";
 import { useContext, useRef } from "react";
+import style from '../modules/day.module.css';
 import getColor from "../utils/getColor";
 import DatepickerContext from "./datepickerContext";
-import style from '../modules/day.module.css';
 
 function Day({ dayLabel, date }) {
+  const [isBtn, setIsBtn] = useState(false);
   const dayRef = useRef(null);
   const {
     focusedDate,
@@ -16,8 +18,12 @@ function Day({ dayLabel, date }) {
     isFirstOrLastSelectedDate,
     onDateSelect,
     onDateFocus,
-    onDateHover
-  } = useContext(DatepickerContext);
+    onDateHover, numberOfCurrentDay} = useContext(DatepickerContext);
+  useEffect(() => {
+    if (dayLabel > numberOfCurrentDay) {
+      setIsBtn(true);
+    }
+  }, [dayLabel])
   const {
     isSelected,
     isSelectedStartOrEnd,
@@ -52,17 +58,22 @@ function Day({ dayLabel, date }) {
     disabledDate
   );
 
+  const handleCheckDate = () => {
+    onClick();
+    // minBookingDate(true);
+  };
   switch (getColorFn) {
     case 'selectedFirstOrLastColor':
       return (
         <button
           className={style.dayLabelSelectedFirstOrLastColor}
-          onClick={onClick}
+          onClick={handleCheckDate}
           onKeyDown={onKeyDown}
           onMouseEnter={onMouseEnter}
           tabIndex={tabIndex}
           type="button"
           ref={dayRef}
+          disabled={isBtn}
         >
           {dayLabel}
         </button>
@@ -71,12 +82,13 @@ function Day({ dayLabel, date }) {
       return (
         <button
           className={style.dayLabelNormalColor}
-          onClick={onClick}
+          onClick={handleCheckDate}
           onKeyDown={onKeyDown}
           onMouseEnter={onMouseEnter}
           tabIndex={tabIndex}
           type="button"
           ref={dayRef}
+          disabled={isBtn}
         >
           {dayLabel}
         </button>
@@ -85,12 +97,13 @@ function Day({ dayLabel, date }) {
       return (
         <button
           className={style.dayLabelSelectedColor}
-          onClick={onClick}
+          onClick={handleCheckDate}
           onKeyDown={onKeyDown}
           onMouseEnter={onMouseEnter}
           tabIndex={tabIndex}
           type="button"
           ref={dayRef}
+          disabled={isBtn}
         >
           {dayLabel}
         </button>
@@ -99,12 +112,13 @@ function Day({ dayLabel, date }) {
       return (
         <button
           className={style.dayLabelRangeHoverColor}
-          onClick={onClick}
+          onClick={handleCheckDate}
           onKeyDown={onKeyDown}
           onMouseEnter={onMouseEnter}
           tabIndex={tabIndex}
           type="button"
           ref={dayRef}
+          disabled={isBtn}
         >
           {dayLabel}
         </button>
@@ -113,12 +127,13 @@ function Day({ dayLabel, date }) {
       return (
         <button
           className={style.dayLabelDisabledColor}
-          onClick={onClick}
+          onClick={handleCheckDate}
           onKeyDown={onKeyDown}
           onMouseEnter={onMouseEnter}
           tabIndex={tabIndex}
           type="button"
           ref={dayRef}
+          disabled={isBtn}
         >
           {dayLabel}
         </button>
@@ -127,12 +142,13 @@ function Day({ dayLabel, date }) {
       return (
         <button
           className={style.dayLabelDisabledColor}
-          onClick={onClick}
+          onClick={handleCheckDate}
           onKeyDown={onKeyDown}
           onMouseEnter={onMouseEnter}
           tabIndex={tabIndex}
           type="button"
           ref={dayRef}
+          disabled={isBtn}
         >
           {dayLabel}
         </button>
